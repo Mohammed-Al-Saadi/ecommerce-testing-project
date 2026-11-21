@@ -3,7 +3,7 @@ import Products from "./testData/products.js";
 import filterProducts from "../filter.js";
 
 describe("Product filtering tests (filter.js)", function () {
-  it("should filter products by name", function () {
+  it("FILTER-001: should filter products by name", function () {
     const result = filterProducts(Products, (product) =>
       product.name.toLowerCase().includes("apple"),
     );
@@ -13,7 +13,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[1].name).to.equal("Apple Pie");
   });
 
-  it("should filter products by category", function () {
+  it("FILTER-002: should filter products by category", function () {
     const result = filterProducts(
       Products,
       (product) => product.category === "Dairy",
@@ -23,7 +23,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[0].name).to.equal("Whole Milk");
   });
 
-  it("should filter products by price", function () {
+  it("FILTER-003: should filter products by price", function () {
     const result = filterProducts(Products, (product) => product.price <= 2.5);
 
     expect(result).to.have.lengthOf(2);
@@ -31,7 +31,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[1].name).to.equal("Fresh Bread");
   });
 
-  it("should filter products by contents", function () {
+  it("FILTER-004: should filter products by contents", function () {
     const result = filterProducts(Products, (product) =>
       product.contents.toLowerCase().includes("apple"),
     );
@@ -41,7 +41,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[1].name).to.equal("Apple Pie");
   });
 
-  it("should filter products by producer", function () {
+  it("FILTER-005: should filter products by producer", function () {
     const result = filterProducts(
       Products,
       (product) => product.producer === "Farm A",
@@ -52,7 +52,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[1].name).to.equal("Apple Pie");
   });
 
-  it("should find products with a missing optional category", function () {
+  it("FILTER-006: should find products with a missing optional category", function () {
     const result = filterProducts(
       Products,
       (product) => product.category === "",
@@ -62,19 +62,19 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[0].name).to.equal("Fresh Bread");
   });
 
-  it("should return an empty array when no products match", function () {
+  it("FILTER-007: should return an empty array when no products match", function () {
     const result = filterProducts(Products, (product) => product.price > 100);
 
     expect(result).to.deep.equal([]);
   });
 
-  it("should handle an empty product list", function () {
+  it("FILTER-008: should handle an empty product list", function () {
     const result = filterProducts([], (product) => product.price < 5);
 
     expect(result).to.deep.equal([]);
   });
 
-  it("should combine name, category and price filters", function () {
+  it("FILTER-009: should combine name, category and price filters", function () {
     const result = filterProducts(
       Products,
       (product) =>
@@ -87,7 +87,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[0].name).to.equal("Apple Juice");
   });
 
-  it("should include products without a category when filtering by price", function () {
+  it("FILTER-010: should include products without a category when filtering by price", function () {
     const result = filterProducts(Products, (product) => product.price < 5);
 
     expect(result).to.have.lengthOf(3);
@@ -96,7 +96,7 @@ describe("Product filtering tests (filter.js)", function () {
     expect(result[2].name).to.equal("Fresh Bread");
   });
 
-  it("should return products in the Dairy category or without a category", function () {
+  it("FILTER-011: should return products in the Dairy category or without a category", function () {
     const result = filterProducts(
       Products,
       (product) => product.category === "Dairy" || product.category === "",
