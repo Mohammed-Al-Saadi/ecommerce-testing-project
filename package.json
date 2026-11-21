@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha \"src/tests/**/*.js\"",
-    "coverage": "nyc --reporter=text --reporter=lcov mocha \"src/test/**/*.js\""
+    "coverage": "nyc --reporter=text --reporter=lcov mocha \"src/tests/**/*.js\""
   },
   "author": "",
   "license": "MIT",
