@@ -1,26 +1,26 @@
 import { expect } from "chai";
-import Products from "./testData/producerProducts.data.js";
+import Products from "./testData/products.js";
 import get from "../get.js";
 
-describe("get() tests for producer product data", function () {
+describe("get() tests for product data", function () {
   it("GET-001: retrieves the product name", function () {
     const result = get(Products[0], "name");
-    expect(result).to.equal("Organic Oat Bread");
+    expect(result).to.equal("Apple Juice");
   });
 
   it("GET-002: retrieves the producer name", function () {
     const result = get(Products[0], "producer.name");
-    expect(result).to.equal("Tampere Bakery");
+    expect(result).to.equal("Farm A");
   });
 
   it("GET-003: retrieves product ingredients", function () {
     const result = get(Products[0], "details.contents");
-    expect(result).to.equal("Oats, wheat flour, water, salt, yeast");
+    expect(result).to.equal("Apple");
   });
 
   it("GET-004: retrieves product stock quantity", function () {
     const result = get(Products[0], "stock.quantity");
-    expect(result).to.equal(35);
+    expect(result).to.equal(15);
   });
 
   it("GET-005: returns a default value for missing product weight", function () {
@@ -40,13 +40,12 @@ describe("get() tests for producer product data", function () {
 
   it("GET-008: retrieves a nested property using an array path", function () {
     const result = get(Products[0], ["stock", "quantity"]);
-    expect(result).to.equal(35);
+    expect(result).to.equal(15);
   });
   //ENHANCEMENT to get()
   // This will not work since get needs the path, but i think it should at least returns the original product list if path is empty.
   it("GET-009: returns the original product when the path is empty", function () {
     const result = get(Products[0], []);
-    console.log(result);
     expect(result).to.deep.equal(Products[0]);
   });
 });

@@ -16,7 +16,7 @@ describe("Product filtering tests (filter.js)", function () {
   it("FILTER-002: should filter products by category", function () {
     const result = filterProducts(
       Products,
-      (product) => product.category === "Dairy",
+      (product) => product.details.category === "Dairy",
     );
 
     expect(result).to.have.lengthOf(1);
@@ -33,7 +33,7 @@ describe("Product filtering tests (filter.js)", function () {
 
   it("FILTER-004: should filter products by contents", function () {
     const result = filterProducts(Products, (product) =>
-      product.contents.toLowerCase().includes("apple"),
+      product.details.contents.toLowerCase().includes("apple"),
     );
 
     expect(result).to.have.lengthOf(2);
@@ -44,7 +44,7 @@ describe("Product filtering tests (filter.js)", function () {
   it("FILTER-005: should filter products by producer", function () {
     const result = filterProducts(
       Products,
-      (product) => product.producer === "Farm A",
+      (product) => product.producer.name === "Farm A",
     );
 
     expect(result).to.have.lengthOf(2);
@@ -55,7 +55,7 @@ describe("Product filtering tests (filter.js)", function () {
   it("FILTER-006: should find products with a missing optional category", function () {
     const result = filterProducts(
       Products,
-      (product) => product.category === "",
+      (product) => product.details.category === "",
     );
 
     expect(result).to.have.lengthOf(1);
@@ -79,7 +79,7 @@ describe("Product filtering tests (filter.js)", function () {
       Products,
       (product) =>
         product.name.toLowerCase().includes("apple") &&
-        product.category === "Drinks" &&
+        product.details.category === "Drinks" &&
         product.price < 5,
     );
 
@@ -99,7 +99,8 @@ describe("Product filtering tests (filter.js)", function () {
   it("FILTER-011: should return products in the Dairy category or without a category", function () {
     const result = filterProducts(
       Products,
-      (product) => product.category === "Dairy" || product.category === "",
+      (product) =>
+        product.details.category === "Dairy" || product.details.category === "",
     );
 
     expect(result).to.have.lengthOf(2);

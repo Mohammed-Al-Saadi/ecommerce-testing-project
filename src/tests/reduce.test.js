@@ -35,10 +35,10 @@ describe("Cart and collection reduction tests (reduce.js)", function () {
     const grouped = reduce(
       Products,
       (result, product) => {
-        if (!result[product.producer]) {
-          result[product.producer] = [];
+        if (!result[product.producer.name]) {
+          result[product.producer.name] = [];
         }
-        result[product.producer].push(product.name);
+        result[product.producer.name].push(product.name);
         return result;
       },
       {},
