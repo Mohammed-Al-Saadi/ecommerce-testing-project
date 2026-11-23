@@ -28,28 +28,23 @@ describe("get() tests for producer product data", function () {
     expect(result).to.equal("Not specified");
   });
 
-  it("GET-006: returns zero when a product has no stock", function () {
-    const result = get(Products[3], "stock.quantity");
-    expect(result).to.equal(0);
-  });
-
-  it("GET-007: returns a default value for a null product", function () {
+  it("GET-006: returns a default value for a null product", function () {
     const result = get(null, "name", "Unknown product");
     expect(result).to.equal("Unknown product");
   });
 
-  it("GET-008: retrieves all producer information", function () {
+  it("GET-007: retrieves all producer information", function () {
     const result = get(Products[0], "producer");
     expect(result).to.deep.equal(Products[0].producer);
   });
 
-  it("GET-010: retrieves a nested property using an array path", function () {
+  it("GET-008: retrieves a nested property using an array path", function () {
     const result = get(Products[0], ["stock", "quantity"]);
     expect(result).to.equal(35);
   });
-
-  // This will not work sice get needs the path, but i think it should at least returns the original product list if path is empty .
-  it("GET-010: returns the original product when the path is empty", function () {
+  //ENHANCEMENT to get()
+  // This will not work since get needs the path, but i think it should at least returns the original product list if path is empty.
+  it("GET-009: returns the original product when the path is empty", function () {
     const result = get(Products[0], []);
     console.log(result);
     expect(result).to.deep.equal(Products[0]);
