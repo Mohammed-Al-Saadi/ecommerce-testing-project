@@ -20,6 +20,10 @@ await td.replaceEsm("../toInteger.js", {
 const { default: chunk } = await import("../chunk.js");
 
 describe("chunk() with stubs", function () {
+  after(function () {
+    td.reset();
+  });
+
   it("CHUNK-001: splits products into equal chunks", function () {
     td.when(toIntegerStub(2)).thenReturn(2);
 
