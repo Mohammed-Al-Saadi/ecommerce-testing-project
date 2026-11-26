@@ -2,6 +2,7 @@ name: Tests and Coveralls
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -13,23 +14,29 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
-          cache: npm
+          node-version: lts/*
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests and create coverage report
+      - name: Run tests and generate coverage
+        id: tests
         run: npm run coverage
+        continue-on-error: true
 
       - name: Upload coverage to Coveralls
+        if: always()
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: coverage/lcov.info
           format: lcov
+
+      - name: Check test result
+        if: steps.tests.outcome == 'failure'
+        run: exit 1
