@@ -41,3 +41,5 @@ jobs:
       - name: Check test result
         if: steps.tests.outcome == 'failure'
         run: exit 1
+
+        
