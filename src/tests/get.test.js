@@ -42,10 +42,8 @@ describe("get() tests for product data", function () {
     const result = get(Products[0], ["stock", "quantity"]);
     expect(result).to.equal(15);
   });
-  //ENHANCEMENT to get()
-  // This will not work since get needs the path, but i think it should at least returns the original product list if path is empty.
-  it("GET-009: returns the original product when the path is empty", function () {
+  it("GET-009: returns undefined when the path is empty", function () {
     const result = get(Products[0], []);
-    expect(result).to.deep.equal(Products[0]);
+    expect(result).to.be.undefined;
   });
 });
