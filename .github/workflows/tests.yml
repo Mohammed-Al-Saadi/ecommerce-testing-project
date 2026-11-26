@@ -36,6 +36,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: coverage/lcov.info
           format: lcov
+          coverage-reporter-version: v0.6.22
 
       - name: Check test result
         if: steps.tests.outcome == 'failure'
